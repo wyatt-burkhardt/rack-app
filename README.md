@@ -11,5 +11,5 @@ gem install rack
 Run the following command within the application root directory:
 
 ```
-rackup
+rackup -Ilib
 ```
