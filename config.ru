@@ -1,5 +1,6 @@
-require 'hello'
+#\ -p 4000
+require 'app'
 
 use Rack::Reloader, 0
 
-run Hello.new
+run App.new
