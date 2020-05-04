@@ -6,4 +6,4 @@ require 'app'
 
 use Rack::Reloader, 0
 
-run App
+run App.new
