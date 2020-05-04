@@ -1,12 +1,20 @@
 require 'post'
 
 class Router
-  def response request
-    case request.env['REQUEST_METHOD']
-    when 'GET'  then get_routes request
-    when 'POST' then post_routes request
-    end
+  def initialize
+    @routes = {}
   end
+
+  def add_route(method:, path:, handler:)
+    routes[[method, path]] = handler
+  end
+
+  # def response request
+  #   case request.env['REQUEST_METHOD']
+  #   when 'GET'  then get_routes request
+  #   when 'POST' then post_routes request
+  #   end
+  # end
 
   private
 
