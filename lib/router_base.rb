@@ -11,33 +11,26 @@ class RouterBase
   # support text, template, json
   # json => headers: { 'content-type': 'application/json' }
   # if template, render ERB
-  def render json: nil, template: nil, status: 200, headers: { 'content-type' => 'text/plain' }
-    body = if json.respond_to? :to_json
+  def render status: 200, headers: { 'content-type' => 'text/plain' }, **args
+    body = if !(json = args[:json]).nil?
       headers['content-type'] = 'application/json'
       json.to_json
-    else
-      b = binding
-      binding.pry
-      template_file = File.join('../views/home/', 'index.html.erb')
-      file_path = template_file_path_for(template_file)
-
-      if File.exists?(file_path)
-        render_erb_file(file_path)
-      else
-
-      end
+    elsif !(template = args[:template]).nil?
+      headers['content-type'] = 'text/html'
+      render_template(template: template)
     end
+
     [status, headers, [body]]
   end
 
-  def render_template template: nil, status: 200, headers: { 'content-type' => 'text/html' }
+  def render_template template: nil
     template_file = File.join('../app/views/', template)
     file_path = template_file_path_for(template_file)
 
-    if File.exists?(file_path)
-      [status, headers, [render_erb_file(file_path)]]
+    if File.exist?(file_path)
+      render_erb_file(file_path)
     else
-      puts 'broken'
+      raise 'File does not exist.'
     end
   end
 
@@ -46,7 +39,8 @@ class RouterBase
   end
 
   def render_erb_file(file_path)
-    File.read(file_path)
+    template = File.read(file_path)
+    ERB.new(template).result(binding)
   end
 end
 

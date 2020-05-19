@@ -1,9 +1,9 @@
 class HomeController < RouterBase
 
   def index
-    hello = 'here'
+    @hello = 'here'
     # b = binding
     # render json: {'text' => 'hello world!'}
-    render_template template: 'home/index.html.erb'
+    render template: 'home/index.html.erb'
   end
 end
