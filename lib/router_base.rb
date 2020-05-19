@@ -1,3 +1,5 @@
+require 'erb'
+
 class RouterBase
   attr_reader :request
 
@@ -8,7 +10,7 @@ class RouterBase
   # support text, template, json
   # json => headers: { 'content-type': 'application/json' }
   # if template, render ERB
-  def render html: nil, json: nil, template: nil, status: 200, headers: { 'content-type' => 'text/plain' }
+  def render json: nil, template: nil, status: 200, headers: { 'content-type' => 'text/plain' }
     body = if json.respond_to? :to_json
       headers['content-type'] = 'application/json'
       json.to_json
