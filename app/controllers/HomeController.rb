@@ -4,6 +4,6 @@ class HomeController < RouterBase
     hello = 'here'
     # b = binding
     # render json: {'text' => 'hello world!'}
-    render template: 'my_erb.erb'
+    render_template template: 'index.html.erb'
   end
 end
