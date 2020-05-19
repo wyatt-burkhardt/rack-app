@@ -18,7 +18,7 @@ class RouterBase
     else
       b = binding
       binding.pry
-      template_file = File.join('../views/home/', "index.html.erb")
+      template_file = File.join('../views/home/', 'index.html.erb')
       file_path = template_file_path_for(template_file)
 
       if File.exists?(file_path)
@@ -31,7 +31,7 @@ class RouterBase
   end
 
   def render_template template: nil, status: 200, headers: { 'content-type' => 'text/html' }
-    template_file = File.join('../app/views/home/', "index.html.erb")
+    template_file = File.join('../app/views/', template)
     file_path = template_file_path_for(template_file)
 
     if File.exists?(file_path)
@@ -42,7 +42,7 @@ class RouterBase
   end
 
   def template_file_path_for(file_name)
-    File.expand_path(File.join("../../views", file_name), __FILE__)
+    File.expand_path(File.join('../../views', file_name), __FILE__)
   end
 
   def render_erb_file(file_path)
