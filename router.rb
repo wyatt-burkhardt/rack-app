@@ -1,6 +1,10 @@
 require_relative 'config/route'
-require_relative 'app/controllers/PostsController'
-require_relative 'app/controllers/HomeController'
+require_relative 'lib/router_base'
+Dir['app/controllers/*.rb'].each do |controller|
+  require_relative controller
+end
+
+require 'pry'
 
 class Router
   attr_reader :request, :routes
@@ -11,15 +15,16 @@ class Router
   def call(env)
     @request = Rack::Request.new(env)
     current_route = Route.new(path: request.path, method: request.request_method)
-    route, handler = routes.find do |route, handler|
-      route === current_route
+    route, handler = routes.find do |route2, handler|
+      route2 === current_route
     end
     puts 'ROUTE>>>'
     puts route
     if route
       call_action_for(handler)
     else
-      Rack::Response.new('File not found', 404)
+      # Rack::Response.new('File not found', 404)
+      [404, {}, ['File not found']]
     end
   end
 

@@ -1,10 +1,4 @@
-class PostsController
-  attr_reader :request
-
-  def initialize(request)
-    @request = request
-  end
-
+class PostsController < RouterBase
   def index
     [200, { 'Content-Type' => 'text/plain' }, ['Hello from Post#index']]
   end

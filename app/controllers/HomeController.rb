@@ -1,11 +1,9 @@
-class HomeController
-  attr_reader :request
-
-  def initialize(request)
-    @request = request
-  end
+class HomeController < RouterBase
 
   def index
-    [200, { 'Content-Type' => 'text/plain' }, ['Hello, World!']]
+    hello = 'here'
+    # b = binding
+    # render json: {'text' => 'hello world!'}
+    render template: 'my_erb.erb'
   end
 end
