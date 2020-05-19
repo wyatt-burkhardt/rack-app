@@ -14,6 +14,8 @@ class RouterBase
     body = if json.respond_to? :to_json
       headers['content-type'] = 'application/json'
       json.to_json
+    else
+      b = binding
     end
 
 
