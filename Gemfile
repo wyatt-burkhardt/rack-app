@@ -6,3 +6,5 @@ source "https://rubygems.org"
 
 gem 'redis-objects'
 gem 'connection_pool'
+gem 'rack'
+gem 'pry'
