@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: rackapp-deploy
+  name: rackapp-deploy
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rackapp
+  template:
+    metadata:
+      labels:
+        app: rackapp
+    spec:
+      containers:
+        - image: rack-app
+          imagePullPolicy: IfNotPresent
+          name: web
