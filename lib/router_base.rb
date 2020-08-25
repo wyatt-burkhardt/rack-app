@@ -1,5 +1,6 @@
 require 'erb'
 require 'pry'
+require 'cgi'
 
 class RouterBase
   attr_reader :request
@@ -42,8 +43,8 @@ class RouterBase
     template = File.read(file_path)
     ERB.new(template).result(binding)
   end
+
+  def params
+    CGI.parse(@request.body.read)
+  end
 end
-
-
-# b = binding
-# ERB.new("<% hello %>").result b

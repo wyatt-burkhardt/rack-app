@@ -1,7 +1,12 @@
 # basic rack config file adding the reloader
 
+require 'bundler/setup'
+# this requires all dependencies automatically
+Bundler.require(:default)
+
 # require 'app'
 require_relative 'config/routes'
+require_relative 'config/database'
 
 #\ -p 4000
 

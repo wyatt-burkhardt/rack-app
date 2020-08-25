@@ -4,7 +4,12 @@ class PostsController < RouterBase
     # [200, { 'Content-Type' => 'text/plain' }, ['Hello from Post#index']]
   end
 
+  def new
+    render template: 'posts/new.html.erb'
+  end
+
   def create
-    [200, { 'Content-Type' => 'text/plain' }, ['Hello from Post#create']]
+    @title = params['title'][0]
+    [200, { 'Content-Type' => 'text/plain' }, [@title]]
   end
 end
